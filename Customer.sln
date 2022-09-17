@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{414E8174-93DE-4FB5-8CEA-0C423BD8BEB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6A82D413-D770-4011-9231-CEA754D461E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.API", "src\Customer.API\Customer.API.csproj", "{EEE3DD07-8CE8-4188-A233-D03E9BACF4DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.API.IntegrationTests", "tests\Customer.API.IntegrationTests\Customer.API.IntegrationTests.csproj", "{2BCB2626-D49C-4A06-BB4E-AEE162BBAABE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EEE3DD07-8CE8-4188-A233-D03E9BACF4DE} = {414E8174-93DE-4FB5-8CEA-0C423BD8BEB7}
+		{2BCB2626-D49C-4A06-BB4E-AEE162BBAABE} = {6A82D413-D770-4011-9231-CEA754D461E8}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEE3DD07-8CE8-4188-A233-D03E9BACF4DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEE3DD07-8CE8-4188-A233-D03E9BACF4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEE3DD07-8CE8-4188-A233-D03E9BACF4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEE3DD07-8CE8-4188-A233-D03E9BACF4DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BCB2626-D49C-4A06-BB4E-AEE162BBAABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BCB2626-D49C-4A06-BB4E-AEE162BBAABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BCB2626-D49C-4A06-BB4E-AEE162BBAABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BCB2626-D49C-4A06-BB4E-AEE162BBAABE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

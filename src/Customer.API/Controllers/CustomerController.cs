@@ -1,5 +1,4 @@
-﻿using Customer.API.Repositories;
-using Customer.API.Services.Contracts;
+﻿using Customer.API.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Customer.API.Controllers;
@@ -20,7 +19,7 @@ public class CustomerController : ControllerBase
     {
         var customerCreated = await _customerService.CreateAsync(customer, cancellationToken);
         if (customerCreated == null) return BadRequest("Error when try save new customer");
-        return Ok(customerCreated);
+        return Created($"/customer/{customer.Id}", customer);
 
     }
 

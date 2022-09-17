@@ -12,6 +12,7 @@ builder.Services.AddDbContext<CustomerDbContext>(optionsAction: optionsBuilder =
 {
     optionsBuilder.UseInMemoryDatabase("CustomerDB");
 });
+
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 var app = builder.Build();
@@ -29,3 +30,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program {}

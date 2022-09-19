@@ -5,7 +5,7 @@ namespace Customer.API.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public class CustomerController : ControllerBase
+public sealed class CustomerController : ControllerBase
 {
     private readonly ICustomerService _customerService;
     

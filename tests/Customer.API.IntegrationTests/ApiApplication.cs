@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Customer.API.IntegrationTests;
 
-public class ApiApplication : WebApplicationFactory<Program>
+public sealed class ApiApplication : WebApplicationFactory<Program>
 {
     protected override IHost CreateHost(IHostBuilder builder)
     {

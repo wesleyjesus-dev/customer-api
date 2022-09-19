@@ -1,39 +1,33 @@
-﻿using Customer.API.Repositories;
+﻿using Customer.API.Repositories.Contracts;
 using Customer.API.Services.Contracts;
-using Microsoft.EntityFrameworkCore;
 
 namespace Customer.API.Services;
 
-public class CustomerService : ICustomerService
+public sealed class CustomerService : ICustomerService
 {
-    private readonly CustomerDbContext _context;
-
-    public CustomerService(CustomerDbContext context)
+    private readonly ICustomerRepository _repository;
+    
+    public CustomerService(ICustomerRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public async ValueTask<int?> Remove(Guid customerId, CancellationToken cancellationToken)
     {
         var customer = await GetCustomer(customerId, cancellationToken);
         if (customer == null) return null;
-        _context.Customers.Remove(customer);
-        var executed = await _context.SaveChangesAsync(cancellationToken);
+        var executed = await _repository.RemoveAsync(customer.Id, cancellationToken);
         return executed;
     }
 
     public Task<Domain.Customer?> GetCustomer(Guid customerId, CancellationToken cancellationToken)
-    {
-        return _context.Customers
-            .AsNoTracking()
-            .FirstOrDefaultAsync(customer => customer.Id == customerId, cancellationToken);
-    }
+        => _repository.GetCustomerAsync(customerId, cancellationToken);
     
     public Task<List<Domain.Customer>> GetCustomers(CancellationToken cancellationToken)
     {
         if (cancellationToken.IsCancellationRequested) throw new OperationCanceledException();
-        
-        return _context.Customers.ToListAsync(cancellationToken: cancellationToken);
+
+        return _repository.GetCustomersAsync(cancellationToken);
     }
 
     public async ValueTask<Domain.Customer?> CreateAsync(Domain.Customer customer, CancellationToken cancellationToken)
@@ -41,9 +35,8 @@ public class CustomerService : ICustomerService
         try
         {
             customer.Id = Guid.NewGuid();
-            _context.Customers.Add(customer);
-            await _context.SaveChangesAsync(cancellationToken);
-            return customer;
+            var customerCreated = await _repository.CreateAsync(customer, cancellationToken);
+            return customerCreated;
         }
         catch (Exception e)
         {

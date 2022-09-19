@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Customer.API.IntegrationTests.Controllers;
 
-public class CustomerControllerTests : IClassFixture<CustomerApiApplication>
+public sealed class CustomerControllerTests : IClassFixture<CustomerApiApplication>
 {
     private readonly CustomerApiApplication _customerApiApplication;
     
@@ -22,7 +22,7 @@ public class CustomerControllerTests : IClassFixture<CustomerApiApplication>
             PropertyNameCaseInsensitive = true
         });
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal(3,customers.Count);
+        Assert.Equal(3,customers?.Count);
     }
 
     [Fact(DisplayName = "Should return a customer")]
@@ -35,8 +35,8 @@ public class CustomerControllerTests : IClassFixture<CustomerApiApplication>
             PropertyNameCaseInsensitive = true
         });
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("Batman", customer.Name);
-        Assert.Equal(29, customer.Age);
+        Assert.Equal("Batman", customer?.Name);
+        Assert.Equal(29, customer?.Age);
     }
 
     [Fact(DisplayName = "Should create a new customer")]

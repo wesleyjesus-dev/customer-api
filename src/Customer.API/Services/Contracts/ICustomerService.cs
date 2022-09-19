@@ -6,4 +6,5 @@ public interface ICustomerService
     Task<Domain.Customer?> GetCustomer(Guid customerId, CancellationToken cancellationToken);
     Task<List<Domain.Customer>> GetCustomers(CancellationToken cancellationToken);
     ValueTask<Domain.Customer?> CreateAsync(Domain.Customer customer, CancellationToken cancellationToken);
+    ValueTask<Domain.Customer?> UpdateAsync(Domain.Customer customer, CancellationToken cancellationToken);
 }

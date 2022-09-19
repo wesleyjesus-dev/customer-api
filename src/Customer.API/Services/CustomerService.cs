@@ -44,4 +44,13 @@ public sealed class CustomerService : ICustomerService
             return null;
         }
     }
+
+    public async ValueTask<Domain.Customer?> UpdateAsync(Domain.Customer customer, CancellationToken cancellationToken)
+    {
+        var customerFound = await GetCustomer(customer.Id, cancellationToken);
+        if (customerFound == null) return null;
+        customer.Name = customer.Name;
+        var updatedClient = await _repository.UpdateAsync(customer, cancellationToken);
+        return updatedClient;
+    }
 }

@@ -32,16 +32,24 @@ public sealed class CustomerController : ControllerBase
     }
 
     [HttpGet]
-    public async ValueTask<IActionResult> GetAll(CancellationToken cancellationToken)
+    public async ValueTask<IActionResult> Get(CancellationToken cancellationToken)
     {
         return Ok(await _customerService.GetCustomers(cancellationToken));
     }
     
     [HttpGet("{customerId}")]
-    public async ValueTask<IActionResult> GetAll(Guid customerId, CancellationToken cancellationToken)
+    public async ValueTask<IActionResult> Get(Guid customerId, CancellationToken cancellationToken)
     {
         var customer = await _customerService.GetCustomer(customerId, cancellationToken);
         if (customer == null) return NotFound();
         return Ok(customer);
+    }
+
+    [HttpPatch]
+    public async ValueTask<IActionResult> Patch([FromBody] Domain.Customer customer, CancellationToken cancellationToken)
+    {
+        var updatedCustomer = await _customerService.UpdateAsync(customer, cancellationToken);
+        if (updatedCustomer == null) return BadRequest();
+        return NoContent();
     }
 }

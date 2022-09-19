@@ -6,9 +6,9 @@ namespace Customer.API.Repositories;
 public sealed class CachedCustomerRepository : ICustomerRepository
 {
     private readonly IMemoryCache _cache;
-    private readonly CustomerRepository _repository;
+    private readonly ICustomerRepository _repository;
 
-    public CachedCustomerRepository(CustomerRepository repository, IMemoryCache cache)
+    public CachedCustomerRepository(ICustomerRepository repository, IMemoryCache cache)
     {
         _repository = repository;
         _cache = cache;
@@ -55,4 +55,7 @@ public sealed class CachedCustomerRepository : ICustomerRepository
 
     public ValueTask<Domain.Customer?> CreateAsync(Domain.Customer customer, CancellationToken cancellationToken)
         => _repository.CreateAsync(customer, cancellationToken);
+
+    public ValueTask<Domain.Customer?> UpdateAsync(Domain.Customer customer, CancellationToken cancellationToken)
+        => _repository.UpdateAsync(customer, cancellationToken);
 }

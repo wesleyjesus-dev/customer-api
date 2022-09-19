@@ -50,4 +50,11 @@ public sealed class CustomerRepository : ICustomerRepository
             return null;
         }
     }
+
+    public async ValueTask<Domain.Customer?> UpdateAsync(Domain.Customer customer, CancellationToken cancellationToken)
+    {
+        _context.Customers.Update(customer);
+        await _context.SaveChangesAsync(cancellationToken);
+        return customer;
+    }
 }
